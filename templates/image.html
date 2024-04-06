@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1 class="fs-2 text text-center">Edit your Images here - Free for all</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      
+        {% for category, message in messages %} 
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> {{ message | safe}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+
+    {% endif %}
+    {% endwith %}
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <form action="{{ url_for('edit_image') }}" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Upload your Image</label>
+                        <input class="form-control" type="file" id="image" name="image">
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Select your Operation</label>
+                        <select class="select select-bordered w-full max-w-xs" name="operation" id="operation">
+                            <option value="grayscale">Grayscale</option>
+                            <option value="blur">Blur</option>
+                            <option value="removebg">Remove Background</option>
+                            <option value="remove_noise">Remove Noise</option>
+                            <option value="contour">Contour</option>
+                            <option value="detail">Detail</option>
+                            <option value="edge_enhance">Edge Enhance</option>
+                            <option value="emboss">Emboss</option>
+                            <option value="find_edges">Find Edges</option>
+                            <option value="sharpen">Sharpen</option>
+                            <option value="smooth">Smooth</option>
+                            <option value="smooth_more">Smoother</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>
+{% endblock %}
